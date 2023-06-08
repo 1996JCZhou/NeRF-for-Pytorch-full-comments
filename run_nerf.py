@@ -361,14 +361,13 @@ def raw2outputs(raw, z_vals, rays_d, raw_noise_std=0, white_bkgd=False, pytest=F
     # 'torch.norm(rays_d[...,None,:], dim=-1).shape' = N_rays * 1.
     rays_d_len = torch.norm(rays_d[...,None,:], dim=-1)
 
-    """Calculate the distance between adjacent samples
-       along the ray direction in the NDC / world coordinate system
-       according to: 1. the distance between adjacent samples
-                        along the 'z-axis' in the camera coordinate system
-                 and 2. the vector length of the ray direction,
-                        which is 'z-axis' normalized in the camera coordinate system,
-                        even though it is then transformed in the world coordinate system / NDC space.
-                        (Coordinate system transformation does not change vector length.)
+    """Calculate the distance between adjacent samples along the ray direction
+       in the NDC / world coordinate system according to:
+       1. the distance between adjacent samples along the 'z-axis' in the camera coordinate system and
+       2. the vector length of the ray direction, which is 'z-axis' normalized
+          in the camera coordinate system, even though it is then transformed
+          in the world coordinate system / NDC space.
+          (Coordinate system transformation does not change vector length.)
     """
     dists = dists * rays_d_len
 # ------------------------------------------------------------------------
